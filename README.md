@@ -1,6 +1,6 @@
 Customizable Order Management System – Full Overview
-A short video showing how the program run smoothly : https://youtu.be/N_EXAh-6zC8 
-A video showing how each file works, how I wrote the code and explanation of some concept that I used (breaking down video)  : https://youtu.be/Y23zLWznltE
+A short video showing how the program run smoothly : https://youtu.be/ITQ3krNucRU 
+I also made another video which is a bit longer than the previous one, if you are interested in seeing what my code is actually doing, how I wrote the code and explanation of some concept more deeply, (breaking down video)  : https://youtu.be/Y23zLWznltE
 
 Introduction
 The Customizable Order Management System is a flexible and efficient C++ program designed for businesses that manage customer orders. It can be used in retail stores, service centers, repair shops, restaurants, and more. The system allows businesses to:
