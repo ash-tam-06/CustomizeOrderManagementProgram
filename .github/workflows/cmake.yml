@@ -1,10 +1,12 @@
-name: CMake Build
+name: CMake Build and Test
 
 on:
   push:
-    branches: [ main, project1-tests ]
+    branches:
+      - project1-tests
   pull_request:
-    branches: [ main, project1-tests ]
+    branches:
+      - project1-tests
 
 jobs:
   build:
@@ -14,13 +16,19 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Configure CMake
-        run: cmake -S . -B build
+      - name: Set up CMake
+        uses: lukka/get-cmake-action@v2
+        with:
+          cmake-version: '3.21.2'
 
-      - name: Build
-        run: cmake --build build
+      - name: Build with CMake
+        run: |
+          cmake -S . -B build
+          cmake --build build
 
       - name: Run tests
-        run: ctest --test-dir build
+        run: |
+          cmake --build build --target test
