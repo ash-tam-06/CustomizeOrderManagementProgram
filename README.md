@@ -1,3 +1,6 @@
+![CI Status](https://img.shields.io/github/workflow/status/WilliamLebris/Proj1/project1-tests)
+
+
 Customizable Order Management System – Full Overview
 A short video showing how the program run smoothly : https://youtu.be/ITQ3krNucRU 
 I also made another video which is a bit longer than the previous one, if you are interested in seeing what my code is actually doing, how I wrote the code and explanation of some concept more deeply, (breaking down video)  : https://youtu.be/Y23zLWznltE
