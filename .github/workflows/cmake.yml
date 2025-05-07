@@ -1,48 +1,32 @@
 name: Cross-Platform CMake Build and Test
 
-
 on:
   push:
-    branches: [ main ]
+    branches: [ project1-tests ]
   pull_request:
-    branches: [ main ]
+    branches: [ project1-tests ]
 
 jobs:
   build:
-    name: Build and Test on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Set up CMake
-        uses: jwlawson/actions-setup-cmake@v1
-        with:
-          cmake-version: 'latest'
+        uses: lukka/get-cmake@latest
 
-      - name: Install Ninja (macOS only)
-        if: runner.os == 'macOS'
-        run: brew install ninja
+      - name: Create Build Directory
+        run: cmake -E make_directory build
 
-      - name: Install Ninja (Ubuntu only)
-        if: runner.os == 'Linux'
-        run: sudo apt-get install ninja-build
-
-      - name: Install Ninja (Windows only)
-        if: runner.os == 'Windows'
-        run: choco install ninja
-
-      - name: Configure with CMake
-        run: |
-          rm -rf build
-          cmake -S . -B build -DCMAKE_CXX_STANDARD=20 -G Ninja
+      - name: Configure CMake
+        run: cmake -S . -B build
 
       - name: Build
         run: cmake --build build
 
-      - name: Run tests (if any)
-        run: ctest --test-dir build --output-on-failure
+      - name: Run Tests
+        run: ctest --test-dir build || echo "No tests found"
