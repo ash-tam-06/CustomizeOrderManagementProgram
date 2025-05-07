@@ -9,34 +9,42 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest  # This is the default; you can add more OS platforms
-
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
 
+    runs-on: ${{ matrix.os }}
+
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up CMake
+      # Setup for Linux (Ubuntu)
+      - name: Install dependencies (Ubuntu)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y cmake build-essential
+
+      # Setup for macOS
+      - name: Install CMake (macOS)
+        if: runner.os == 'macOS'
         run: |
-          sudo apt-get update && sudo apt-get install -y cmake build-essential  # Linux-only
-        if: matrix.os == 'ubuntu-latest'
+          curl -LO https://github.com/Kitware/CMake/releases/download/v3.24.3/cmake-3.24.3-macos-universal.tar.gz
+          tar -xzf cmake-3.24.3-macos-universal.tar.gz
+          sudo mv cmake-3.24.3-macos-universal/CMake.app/Contents/bin/* /usr/local/bin/
+        # You can change the version if you need a different one.
 
-      - name: Set up CMake on macOS
-        run: brew install cmake  # macOS-specific
-        if: matrix.os == 'macos-latest'
+      # Setup for Windows
+      - name: Install CMake (Windows)
+        if: runner.os == 'Windows'
+        run: choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
 
-      - name: Set up CMake on Windows
-        run: choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'  # Windows-specific
-        if: matrix.os == 'windows-latest'
-
+      # Configure CMake
       - name: Configure CMake
         run: cmake -S . -B build
 
+      # Build the project
       - name: Build
         run: cmake --build build
 
+      # Run tests
       - name: Run tests
         run: ctest --test-dir build --output-on-failure
