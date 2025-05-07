@@ -1,55 +1,38 @@
-name: CMake Build and Test
+name: Cross-Platform CMake Build and Test
 
 on:
   push:
-    branches:
-      - main
-      - project1-tests
+    branches: [ project1-tests ]
   pull_request:
+    branches: [ project1-tests ]
 
 jobs:
-  build:
+  build-and-test:
+    name: ${{ matrix.os }} Build
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-
-    runs-on: ${{ matrix.os }}
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@v3
 
-      # Setup for Linux (Ubuntu)
-      - name: Install dependencies (Ubuntu)
+      - name: Set up CMake
+        uses: jwlawson/actions-setup-cmake@v1
+
+      - name: Install dependencies (Linux)
         if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y cmake build-essential
+        run: sudo apt-get update && sudo apt-get install -y cmake g++ ninja-build
 
-      # Setup for macOS
-      - name: Install CMake (macOS)
+      - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
-        run: |
-          curl -LO https://github.com/Kitware/CMake/releases/download/v3.24.3/cmake-3.24.3-macos-universal.tar.gz
-          tar -xzf cmake-3.24.3-macos-universal.tar.gz
-          sudo mv cmake-3.24.3-macos-universal/CMake.app/Contents/bin/* /usr/local/bin/
+        run: brew install cmake ninja
 
-      # Setup for Windows
-      - name: Install CMake (Windows)
-        if: runner.os == 'Windows'
-        run: choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
-
-      # Clean previous build and cache
-      - name: Clean CMake cache and previous build
-        run: |
-          rm -rf build
-          rm -f CMakeCache.txt
-
-      # Configure CMake
       - name: Configure CMake
-        run: cmake -S . -B build
+        run: cmake -S . -B build -DCMAKE_CXX_STANDARD=20
 
-      # Build the project
       - name: Build
         run: cmake --build build
 
-      # Run tests
       - name: Run tests
         run: ctest --test-dir build --output-on-failure
