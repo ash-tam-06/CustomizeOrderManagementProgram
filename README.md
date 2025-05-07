@@ -1,4 +1,4 @@
-![CI Status](https://img.shields.io/github/workflow/status/WilliamLebris/Proj1/project1-tests)
+[![CMake Build](https://github.com/WilliamLebris/CustomizeOrderManagementProgram/actions/workflows/cmake.yml/badge.svg)](https://github.com/WilliamLebris/CustomizeOrderManagementProgram/actions/workflows/cmake.yml)
 
 
 Customizable Order Management System – Full Overview
