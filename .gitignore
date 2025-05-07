@@ -43,4 +43,5 @@ cmake-build-release/
 cmake-build-folder/
 CTestTestfile.cmake
 Testing/
+.idea/
 

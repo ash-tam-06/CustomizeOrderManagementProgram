@@ -87,28 +87,3 @@ TEST(OrderEdgeCaseTest, MaxOrderLimitReached) {
 
     EXPECT_NE(output.find("Order limit reached"), string::npos);
 }
-
-// Optional: More edge tests like quantity = 0 or large totalPrice can be added
-
-/*
-*#include <gtest/gtest.h>
-#include "addOrder.hpp"
-
-// Test a function you wrote
-TEST(AddOrderTest, HandlesValidInput) {
-EXPECT_EQ(addOrder(10, 5), 15);  // Hypothetical test for addOrder()
-}
-
-// Test for control flow
-TEST(ControlFlowTest, LoopsCorrectly) {
-int result = 0;
-for (int i = 0; i < 5; ++i) {
-result += i;
-}
-EXPECT_EQ(result, 10);  // Testing if loop works correctly
-}
-
-// Test an edge case
-TEST(EdgeCaseTest, HandlesEmptyInput) {
-EXPECT_THROW(addOrder(0, 0), std::invalid_argument);  // Hypothetical edge case
-}

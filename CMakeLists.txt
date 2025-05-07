@@ -7,23 +7,17 @@ set(CMAKE_CXX_STANDARD 20)
 
 # Check the platform for any specific configurations
 if(WIN32)
-    # Any Windows-specific setup
-    add_definitions(-D_CRT_SECURE_NO_WARNINGS)  # Disable specific warnings for MSVC
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif()
 
 if(APPLE OR UNIX)
-    # Any macOS/Linux-specific setup
+    # macOS/Linux-specific setup if needed
 endif()
 
-# Fetch GoogleTest with a specific release version
-include(FetchContent)
-FetchContent_Declare(
-        googletest
-        URL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.zip
-)
-FetchContent_MakeAvailable(googletest)
+# Include GoogleTest from extern folder
+add_subdirectory(extern/googletest)
 
-# Create a static library for the project
+# Create static library for project
 add_library(Proj1Lib STATIC
         src/addOrder.cpp
         include/addOrder.hpp
@@ -49,19 +43,14 @@ add_library(Proj1Lib STATIC
         include/setupProducts.hpp
 )
 
-# Main project executable
+# Main executable
 add_executable(Proj1 main.cpp)
 target_link_libraries(Proj1 PRIVATE Proj1Lib)
 
-# Enable testing
+# Tests
 enable_testing()
-
-# Test executable
 add_executable(test_orders tests/orders_tests.cpp)
-
-# Link GoogleTest and the static library (Proj1Lib) to the test executable
 target_link_libraries(test_orders PRIVATE gtest gtest_main Proj1Lib)
 
-# Discover GoogleTest tests
 include(GoogleTest)
 gtest_discover_tests(test_orders)
