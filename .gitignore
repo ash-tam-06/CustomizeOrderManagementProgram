@@ -1,3 +1,4 @@
+
 # Prerequisites
 *.d
 
@@ -30,3 +31,28 @@
 *.exe
 *.out
 *.app
+
+# Ignore Xcode project files and build artifacts
+*.xcodeproj/
+*.xcworkspace/
+*.xcuserdata/
+*.xcassets/
+*.xcconfig
+DerivedData/
+build/
+.idea/
+Pods/
+
+# macOS system files
+.DS_Store
+
+cmake-build-debug/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.user
+*.o
+*.obj
+*.log
+*.bin
