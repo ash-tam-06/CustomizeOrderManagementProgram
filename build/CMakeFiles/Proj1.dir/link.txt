@@ -1,1 +1,0 @@
-/usr/bin/c++ -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/Proj1.dir/main.cpp.o -o Proj1  libProj1Lib.a
