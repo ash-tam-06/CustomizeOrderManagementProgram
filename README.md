@@ -1,4 +1,4 @@
-[![CMake Build](https://github.com/WilliamLebris/CustomizeOrderManagementProgram/actions/workflows/cmake.yml/badge.svg)](https://github.com/WilliamLebris/CustomizeOrderManagementProgram/actions/workflows/cmake.yml)
+![Cross-Platform CMake Build and Test](https://github.com/WilliamLebris/CustomizeOrderManagementProgram/actions/workflows/cmake.yml/badge.svg?branch=project1-tests)
 
 Customizable Order Management System – Full Overview
 A short video showing how the program run smoothly : https://youtu.be/ITQ3krNucRU 
