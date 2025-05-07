@@ -141,51 +141,33 @@ Steps to Build and Run the Project
 1. Clone the repository
    If you haven't already, clone the repository to your local machine:
 
-bash
-Copy
-Edit
-git clone <your-repository-url>
-cd Proj1
+git clone https://github.com/WilliamLebris/CustomizeOrderManagementProgram/tree/project1-tests
+
 2. Create the Build Directory
    In your terminal, navigate to the project folder and create a build directory using CMake:
 
-bash
-Copy
-Edit
 cmake -S . -B build
 This command will generate the necessary build files in a directory called build.
 
 3. Build the Project
    After configuring the project with CMake, build the project by running:
 
-bash
-Copy
-Edit
 cmake --build build
 This will compile the project and generate the executable files (Proj1 and test_orders).
 
 4. Run the Project
    To run the main project executable:
 
-bash
-Copy
-Edit
 ./build/Proj1
 This will execute the Proj1 application.
 
 5. Run the Tests
    To run the tests (using GoogleTest), you can execute the following:
 
-bash
-Copy
-Edit
 ./build/test_orders
 This will run the unit tests and show the results in your terminal.
 
 6. Clean Up (Optional)
    If you want to clean up the build files, you can remove the build directory:
 
-bash
-Copy
-Edit
 rm -rf build

@@ -3,11 +3,11 @@ project(Proj1)
 
 set(CMAKE_CXX_STANDARD 20)
 
-# Fetch GoogleTest
+# Fetch GoogleTest with a specific release version (more stable than using 'main')
 include(FetchContent)
 FetchContent_Declare(
         googletest
-        URL https://github.com/google/googletest/archive/refs/heads/main.zip
+        URL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.zip  # Specific version for stability
 )
 FetchContent_MakeAvailable(googletest)
 
@@ -39,7 +39,7 @@ add_library(Proj1Lib STATIC
 
 # Main project executable
 add_executable(Proj1 main.cpp)
-target_link_libraries(Proj1 Proj1Lib)
+target_link_libraries(Proj1 PRIVATE Proj1Lib)
 
 # Enable testing
 enable_testing()
@@ -48,7 +48,8 @@ enable_testing()
 add_executable(test_orders tests/orders_tests.cpp)
 
 # Link GoogleTest and the static library (Proj1Lib) to the test executable
-target_link_libraries(test_orders gtest gtest_main Proj1Lib)
+target_link_libraries(test_orders PRIVATE gtest gtest_main Proj1Lib)
 
+# Discover GoogleTest tests
 include(GoogleTest)
 gtest_discover_tests(test_orders)
