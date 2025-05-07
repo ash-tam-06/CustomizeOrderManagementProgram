@@ -30,12 +30,17 @@ jobs:
           curl -LO https://github.com/Kitware/CMake/releases/download/v3.24.3/cmake-3.24.3-macos-universal.tar.gz
           tar -xzf cmake-3.24.3-macos-universal.tar.gz
           sudo mv cmake-3.24.3-macos-universal/CMake.app/Contents/bin/* /usr/local/bin/
-        # You can change the version if you need a different one.
 
       # Setup for Windows
       - name: Install CMake (Windows)
         if: runner.os == 'Windows'
         run: choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
+
+      # Clean previous build and cache
+      - name: Clean CMake cache and previous build
+        run: |
+          rm -rf build
+          rm -f CMakeCache.txt
 
       # Configure CMake
       - name: Configure CMake
