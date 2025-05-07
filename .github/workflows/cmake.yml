@@ -2,31 +2,53 @@ name: Cross-Platform CMake Build and Test
 
 on:
   push:
-    branches: [ project1-tests ]
+    branches: [ main, project1-tests ]
   pull_request:
-    branches: [ project1-tests ]
+    branches: [ main ]
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        build_type: [Debug]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - name: Set up CMake
-        uses: lukka/get-cmake@latest
+      # Create GoogleTest directory structure if it doesn't exist
+      - name: Create directories
+        run: |
+          mkdir -p extern/googletest
+        shell: bash
 
-      - name: Create Build Directory
-        run: cmake -E make_directory build
+      # Install dependencies for different platforms
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y build-essential
+
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.13
+        with:
+          cmake-version: '3.20.x'
 
       - name: Configure CMake
-        run: cmake -S . -B build
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{matrix.build_type}}
 
       - name: Build
-        run: cmake --build build
+        run: cmake --build build --config ${{matrix.build_type}}
 
-      - name: Run Tests
-        run: ctest --test-dir build || echo "No tests found"
+      - name: Test
+        working-directory: build
+        run: |
+          if [ "$RUNNER_OS" == "Windows" ]; then
+            cd ${{matrix.build_type}}
+            ./test_orders.exe
+          else
+            ./test_orders
+          fi
+        shell: bash
