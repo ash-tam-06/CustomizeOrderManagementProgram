@@ -1,0 +1,2 @@
+/usr/bin/ar qc libProj1Lib.a CMakeFiles/Proj1Lib.dir/src/addOrder.cpp.o CMakeFiles/Proj1Lib.dir/src/deleteOrder.cpp.o CMakeFiles/Proj1Lib.dir/src/displayOrders.cpp.o CMakeFiles/Proj1Lib.dir/src/getValidInt.cpp.o CMakeFiles/Proj1Lib.dir/src/getValidDouble.cpp.o CMakeFiles/Proj1Lib.dir/src/globalVariable.cpp.o CMakeFiles/Proj1Lib.dir/src/menu.cpp.o CMakeFiles/Proj1Lib.dir/src/printOrders.cpp.o CMakeFiles/Proj1Lib.dir/src/searchOrder.cpp.o CMakeFiles/Proj1Lib.dir/src/setupCustomerFields.cpp.o CMakeFiles/Proj1Lib.dir/src/setupProducts.cpp.o
+/usr/bin/ranlib libProj1Lib.a
