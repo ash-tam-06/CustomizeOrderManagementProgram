@@ -1,6 +1,4 @@
-![Cross-Platform CMake Build and Test passing](https://img.shields.io/github/workflow/status/WilliamLebris/CustomizeOrderManagementProgram/project1-tests?label=Cross-Platform%20CMake%20Build%20and%20Test%20passing&logo=cmake)
-
-
+[![CMake Build](https://github.com/WilliamLebris/CustomizeOrderManagementProgram/actions/workflows/cmake.yml/badge.svg)](https://github.com/WilliamLebris/CustomizeOrderManagementProgram/actions/workflows/cmake.yml)
 
 Customizable Order Management System – Full Overview
 A short video showing how the program run smoothly : https://youtu.be/ITQ3krNucRU 

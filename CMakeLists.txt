@@ -1,17 +1,14 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.31)
 project(Proj1)
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Fetch GoogleTest
 include(FetchContent)
 FetchContent_Declare(
         googletest
-        URL https://github.com/google/googletest/archive/refs/tags/v1.13.0.zip
+        URL https://github.com/google/googletest/archive/refs/heads/main.zip
 )
-# For Windows: Prevent overriding the parent project's compiler/linker settings
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 # Create a static library for the project
@@ -40,14 +37,11 @@ add_library(Proj1Lib STATIC
         include/setupProducts.hpp
 )
 
-# Set include directories
-target_include_directories(Proj1Lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-
 # Main project executable
 add_executable(Proj1 main.cpp)
 target_link_libraries(Proj1 Proj1Lib)
 
-# Testing
+# Enable testing
 enable_testing()
 
 # Test executable
