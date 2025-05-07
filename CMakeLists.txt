@@ -1,13 +1,23 @@
-cmake_minimum_required(VERSION 3.31)
+cmake_minimum_required(VERSION 3.24)
 project(Proj1)
 
 set(CMAKE_CXX_STANDARD 20)
 
-# Fetch GoogleTest with a specific release version (more stable than using 'main')
+# Check the platform for any specific configurations
+if(WIN32)
+    # Any Windows-specific setup
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)  # Disable specific warnings for MSVC
+endif()
+
+if(APPLE OR UNIX)
+    # Any macOS/Linux-specific setup
+endif()
+
+# Fetch GoogleTest with a specific release version
 include(FetchContent)
 FetchContent_Declare(
         googletest
-        URL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.zip  # Specific version for stability
+        URL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.zip
 )
 FetchContent_MakeAvailable(googletest)
 
