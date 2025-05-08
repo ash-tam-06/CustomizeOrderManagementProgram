@@ -171,3 +171,6 @@ This will run the unit tests and show the results in your terminal.
    If you want to clean up the build files, you can remove the build directory:
 
 rm -rf build
+
+
+Feel free to reach out if ay question pop up.
