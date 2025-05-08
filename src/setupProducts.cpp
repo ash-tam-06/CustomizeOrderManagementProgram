@@ -9,6 +9,7 @@
 #include "../include/getValidInt.hpp"
 #include "../include/globalVariable.hpp"
 #include "../include/getValidDouble.hpp"
+#include <iostream>
 
 using namespace std;
 // Step 1: Setup Products and Prices

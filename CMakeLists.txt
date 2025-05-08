@@ -17,19 +17,15 @@ if(WIN32)
     endif()
 endif()
 
-# Fetch GoogleTest if it's not present
+# Fetch GoogleTest
 include(FetchContent)
 FetchContent_Declare(
         googletest
         GIT_REPOSITORY https://github.com/google/googletest.git
         GIT_TAG v1.14.0
 )
-# For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
-
-# Include directories
-include_directories(${PROJECT_SOURCE_DIR}/include)
 
 # Create static library for project
 add_library(Proj1Lib STATIC
@@ -46,6 +42,11 @@ add_library(Proj1Lib STATIC
         src/setupProducts.cpp
 )
 
+# Include directories for the library
+target_include_directories(Proj1Lib PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+)
+
 # Main executable
 add_executable(Proj1 main.cpp)
 target_link_libraries(Proj1 PRIVATE Proj1Lib)
@@ -53,7 +54,14 @@ target_link_libraries(Proj1 PRIVATE Proj1Lib)
 # Tests configuration
 enable_testing()
 add_executable(test_orders tests/orders_tests.cpp)
-target_link_libraries(test_orders PRIVATE gtest gtest_main Proj1Lib)
+target_link_libraries(test_orders PRIVATE
+        gtest
+        gtest_main
+        Proj1Lib
+)
+target_include_directories(test_orders PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
 
 # Discover and run the tests with CTest
 include(GoogleTest)

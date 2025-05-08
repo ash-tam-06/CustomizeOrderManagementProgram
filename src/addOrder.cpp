@@ -4,7 +4,8 @@
 //
 //  Created by William Tissi on 2/14/25.
 //
-
+#include <iostream>
+using namespace std;
 #include "../include/addOrder.hpp"
 #include "../include/globalVariable.hpp"
 #include <iomanip>
