@@ -66,3 +66,10 @@ target_include_directories(test_orders PRIVATE
 # Discover and run the tests with CTest
 include(GoogleTest)
 gtest_discover_tests(test_orders)
+
+# Add this right after project() declaration
+if(MSVC)
+    add_compile_options(/W4 /WX)
+else()
+    add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+endif()
