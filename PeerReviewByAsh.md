@@ -1,8 +1,8 @@
 # Code Structure & CMake
-Project is overall pretty organized, and 
+The project is overall pretty organized, and functions are separated into folders that make sense.
 
 # Modularity & Readability
-
+The functions were separated well and in a meaningful way, with each function having a meaningful and descriptive name. Though one function that I wished was in its own cpp and hpp file was the toLowerCase function. When I was trying to write the test for that function, I found that I had to add it to the namespace deleteOrderDeclaration, and I think it would be easier if it were just its own thing rather than be a part of the deleteOrder.cpp file.
 
 # Test Coverage
 There are a total of 3 test cases, which go over edge cases for 2 functions of the code and one test that just makes sure revenue is calculated correctly. I do believe there could have been more edge cases being tested, as well as testing that all parts of the code is functioning as it should be. 
@@ -21,11 +21,11 @@ There are a total of 3 test cases, which go over edge cases for 2 functions of t
 --When searching for order, program will not find order if case doesn't match: its case sensitive.
 
 # Test Output & Clarity
-
+The test names/output were pretty clear on what cases were being tested. Overall, the output of the program was very neat and easy to read. It was a bit clunky when printing out a long list of orders, but everything else was easy to understand.
 
 
 # Architecture & Design Feedback
-Something I wanted to mention about design was on how the program looked when running. Everytime you select an option from then menu that would display an order, more specifically a list of orders, it immediately shows you the menu again. Its not a problem at all, but I think it would make the program more 'friendly' if you were given a moment before the menu poped up. Maybe adding something that just tells you to type something if user is ready to go back to the menu.
+Something I wanted to mention about design was how the program looked when running. Every time you select an option from the menu that would display an order, more specifically a list of orders, it immediately shows you the menu again. It's not a problem at all, but I think it would make the program more 'friendly' if you were given a moment before the menu popped up. Maybe adding something that just tells you to type something if a user is ready to go back to the menu.
 
 # 5 New Tests
 ```
