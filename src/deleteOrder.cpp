@@ -14,7 +14,7 @@ using namespace std;
 
 
 
-string toLowerCase(const string &str) {
+string deleteOrderDeclaration::toLowerCase(const string &str) {
     string lowerStr = str;
     for (char &c : lowerStr) c = tolower(c);
     return lowerStr;
